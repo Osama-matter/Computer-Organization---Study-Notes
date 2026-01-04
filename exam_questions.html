@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Architecture & OS - Study Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Crimson+Pro:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d3561;
+            --secondary: #e94560;
+            --accent: #f4a261;
+            --success: #2a9d8f;
+            --info: #457b9d;
+            --warning: #e76f51;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2b2d42;
+            --border: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--secondary);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 3em;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--secondary);
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        nav {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary), var(--info));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9em;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section.mcq { border-left-color: var(--secondary); }
+        .section.code { border-left-color: var(--success); }
+        .section.problems { border-left-color: var(--accent); }
+        .section.comparisons { border-left-color: var(--info); }
+        .section.diagrams { border-left-color: var(--warning); }
+
+        h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2em;
+            margin-bottom: 12px;
+        }
+
+        .answer {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--success);
+            font-size: 1.1em;
+        }
+
+        .repeated-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-left: 10px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+            white-space: pre;
+        }
+
+        .code-block .keyword { color: #569cd6; }
+        .code-block .register { color: #9cdcfe; }
+        .code-block .number { color: #b5cea8; }
+        .code-block .comment { color: #6a9955; font-style: italic; }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary), var(--info));
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+        }
+
+        td {
+            padding: 18px;
+            border-bottom: 1px solid var(--border);
+            background: white;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f8f9fa;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .comparison-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 3px solid;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-card.left { border-color: var(--success); }
+        .comparison-card.right { border-color: var(--warning); }
+
+        .comparison-card h4 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .comparison-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .comparison-card li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .comparison-card li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--accent);
+            margin: 20px 0;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1em;
+        }
+
+        .diagram {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .hierarchy {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .hierarchy-item {
+            background: linear-gradient(135deg, var(--primary), var(--info));
+            color: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .hierarchy-arrow {
+            font-size: 2em;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .von-neumann {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .component {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid var(--info);
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .component.cpu {
+            grid-column: 2;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-color: var(--accent);
+        }
+
+        .bus-connection {
+            text-align: center;
+            font-size: 1.5em;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .important-note {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--secondary);
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            padding: 15px;
+            margin: 15px 0;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid var(--success);
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 15px;
+            background: var(--success);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+
+            h1 { 
+                font-size: 1.8em;
+                letter-spacing: -1px;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            nav {
+                padding: 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.75em;
+                flex: 1 1 calc(50% - 10px);
+                min-width: 140px;
+            }
+
+            .section {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+                border-left-width: 4px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+            }
+
+            h3 {
+                font-size: 1.2em;
+                margin-top: 20px;
+                margin-bottom: 12px;
+            }
+
+            .question-card {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .question {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+
+            .answer {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+
+            .repeated-badge {
+                display: block;
+                margin-left: 0;
+                margin-top: 8px;
+                width: fit-content;
+                font-size: 0.75em;
+            }
+
+            .code-block {
+                padding: 15px;
+                font-size: 0.75em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+
+            table {
+                font-size: 0.85em;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th, td {
+                padding: 12px 10px;
+            }
+
+            .comparison-table {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .comparison-card {
+                padding: 15px;
+            }
+
+            .comparison-card h4 {
+                font-size: 1.1em;
+                margin-bottom: 12px;
+            }
+
+            .comparison-card li {
+                padding: 8px 0;
+                padding-left: 20px;
+                font-size: 0.9em;
+            }
+
+            .formula-box {
+                padding: 15px;
+                font-size: 0.9em;
+                margin: 15px 0;
+            }
+
+            .diagram {
+                padding: 20px 15px;
+                margin: 20px 0;
+            }
+
+            .hierarchy-item {
+                padding: 15px 20px;
+                font-size: 0.9em;
+                width: 100% !important;
+                max-width: 300px;
+            }
+
+            .hierarchy-item small {
+                font-size: 0.8em;
+            }
+
+            .hierarchy-arrow {
+                font-size: 1.5em;
+            }
+
+            .von-neumann {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .component {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+
+            .component.cpu {
+                grid-column: 1;
+            }
+
+            .important-note {
+                padding: 15px;
+                margin: 15px 0;
+                font-size: 0.9em;
+            }
+
+            .steps li {
+                padding: 12px;
+                padding-left: 50px;
+                margin: 12px 0;
+                font-size: 0.9em;
+            }
+
+            .steps li:before {
+                width: 30px;
+                height: 30px;
+                left: 10px;
+                font-size: 0.9em;
+            }
+
+            .highlight {
+                padding: 2px 6px;
+                font-size: 0.95em;
+            }
+
+            footer {
+                padding: 20px 15px;
+                margin-top: 20px;
+            }
+
+            footer p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .subtitle {
+                font-size: 0.9em;
+            }
+
+            .nav-btn {
+                font-size: 0.7em;
+                padding: 8px 12px;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            .code-block {
+                font-size: 0.7em;
+                padding: 12px;
+            }
+
+            .hierarchy-item {
+                font-size: 0.85em;
+                padding: 12px 15px;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Computer Architecture & OS</h1>
+            <p class="subtitle">Complete Study Guide with Most Repeated Questions</p>
+            <div style="margin-top: 20px;">
+                <a href="index.html" style="display: inline-block; padding: 10px 20px; background: #2d3561; color: white; text-decoration: none; border-radius: 10px; margin: 5px; font-weight: 600;">← Back to Home</a>
+                <a href="theory_summary.html" style="display: inline-block; padding: 10px 20px; background: #8b4513; color: white; text-decoration: none; border-radius: 10px; margin: 5px; font-weight: 600;">View Theory Summary</a>
+            </div>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <button class="nav-btn" onclick="scrollToSection('mcq')">📝 MCQ Questions</button>
+                <button class="nav-btn" onclick="scrollToSection('code')">💻 Assembly Code</button>
+                <button class="nav-btn" onclick="scrollToSection('problems')">📊 Problems & Calculations</button>
+                <button class="nav-btn" onclick="scrollToSection('comparisons')">⚖️ Comparisons</button>
+                <button class="nav-btn" onclick="scrollToSection('diagrams')">📐 Diagrams</button>
+            </div>
+        </nav>
+
+        <!-- MCQ SECTION -->
+        <div id="mcq" class="section mcq">
+            <h2>📝 Multiple Choice Questions</h2>
+            
+            <h3>🔥 Most Repeated (5 times)</h3>
+            
+            <div class="question-card">
+                <div class="question">
+                    Q: A semiconductor memory system is subject to errors, categorized as:
+                    <span class="repeated-badge">5x Repeated</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Hard failure and Soft error
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: The short-term scheduler is also known as the:
+                    <span class="repeated-badge">5x Repeated</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Dispatcher
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: The hardware module that translates virtual address to physical address is:
+                    <span class="repeated-badge">5x Repeated</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Memory Management Unit (MMU)
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: The portion of the OS in main memory is called the:
+                    <span class="repeated-badge">4x Repeated</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Kernel
+                </div>
+            </div>
+
+            <h3>🔄 Repeated 3 Times</h3>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: Write Through technique is used in which memory for updating data?
+                    <span class="repeated-badge">3x Repeated</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Cache memory
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: A memory unit accessed by content is called:
+                    <span class="repeated-badge">3x Repeated</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Associative Memory
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: Blocks on the magnetic tape are separated by gaps referred to as:
+                    <span class="repeated-badge">3x Repeated</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Inter-record gaps
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: DRAM is made with cells that store data as charge on:
+                    <span class="repeated-badge">3x Repeated</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Capacitors
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: Two approaches to dealing with multiple interrupts are:
+                    <span class="repeated-badge">3x Repeated</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Disabled interrupts and Priority interrupts
+                </div>
+            </div>
+
+            <h3>📌 Repeated 2 Times</h3>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: Associative mapping permits each main memory block to be loaded into ... of cache:
+                    <span class="repeated-badge">2x</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Any line
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: Assembly language uses ... codes in place of binary numbers:
+                    <span class="repeated-badge">2x</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Alphabetic (or Mnemonic)
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: The register that keeps track of the instructions in memory:
+                    <span class="repeated-badge">2x</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Program Counter (PC)
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: The Cache memory works between:
+                    <span class="repeated-badge">2x</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> CPU and RAM
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: On a movable-head system, the time it takes to position the head at the track is:
+                    <span class="repeated-badge">2x</span>
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Seek time
+                </div>
+            </div>
+
+            <h3>📍 Important Single Questions</h3>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: An OS has two main objectives:
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Convenience and Efficiency
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: What characteristic of RAM makes it not suitable for permanent storage?
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Volatile
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: Von Neumann architecture is classified as:
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> SISD (Single Instruction Single Data)
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: Which memory unit has lowest access time?
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Registers
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: The circuit used to store one bit of data is:
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Flip Flop
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: EPROM, EEPROM, and Flash Memory are all ... category:
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Read-mostly memory
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question">
+                    Q: The time taken for the correct sector to rotate under the head is:
+                </div>
+                <div class="answer">
+                    <strong>Answer:</strong> Rotational latency
+                </div>
+            </div>
+        </div>
+
+        <!-- CODE SECTION -->
+        <div id="code" class="section code">
+            <h2>💻 Assembly Language Code</h2>
+
+            <h3>🔥 Most Repeated: Code Tracing (4 times: 2018, 2019, 2021, 2022)</h3>
+            
+            <div class="important-note">
+                <strong>⚠️ This exact question appeared 4 times!</strong> Make sure you understand each operation.
+            </div>
+
+            <div class="question">Trace the following assembly program and show the final value of AX:</div>
+
+            <div class="code-block">
+<span class="keyword">.model</span> small
+<span class="keyword">.data</span>
+    <span class="register">a</span> <span class="keyword">dw</span> <span class="number">23c5h</span>
+<span class="keyword">.code</span>
+<span class="keyword">Start:</span>
+    <span class="keyword">mov</span> <span class="register">ax</span>, @data
+    <span class="keyword">mov</span> <span class="register">ds</span>, <span class="register">ax</span>
+    <span class="keyword">mov</span> <span class="register">ax</span>, <span class="register">a</span>      <span class="comment">; AX = 23C5h (0010 0011 1100 0101)</span>
+    <span class="keyword">mov</span> <span class="register">cl</span>, <span class="number">1h</span>
+    <span class="keyword">shl</span> <span class="register">ax</span>, <span class="register">cl</span>     <span class="comment">; Shift Left</span>
+    <span class="keyword">shr</span> <span class="register">ax</span>, <span class="register">cl</span>     <span class="comment">; Shift Right</span>
+    <span class="keyword">ror</span> <span class="register">ax</span>, <span class="register">cl</span>     <span class="comment">; Rotate Right</span>
+    <span class="keyword">rol</span> <span class="register">ax</span>, <span class="register">cl</span>     <span class="comment">; Rotate Left</span>
+    <span class="keyword">mov</span> <span class="register">ah</span>, <span class="number">4ch</span>
+    <span class="keyword">int</span> <span class="number">21h</span>
+<span class="keyword">end</span> start
+            </div>
+
+            <h3>Step-by-Step Solution:</h3>
+            <ul class="steps">
+                <li><strong>Initial AX:</strong> 23C5h = <span class="highlight">0010 0011 1100 0101</span></li>
+                <li><strong>After SHL (Shift Left):</strong> 478Ah = <span class="highlight">0100 0111 1000 1010</span></li>
+                <li><strong>After SHR (Shift Right):</strong> 23C5h = <span class="highlight">0010 0011 1100 0101</span></li>
+                <li><strong>After ROR (Rotate Right):</strong> 91E2h = <span class="highlight">1001 0001 1110 0010</span></li>
+                <li><strong>After ROL (Rotate Left):</strong> 23C5h = <span class="highlight">0010 0011 1100 0101</span></li>
+            </ul>
+
+            <div class="answer">
+                <strong>✅ Final Answer: AX = 23C5h</strong>
+            </div>
+
+            <h3>🔥 Array Summation (3 times: 2019, 2021, 2023)</h3>
+
+            <div class="question">Write an Assembly program to get the summation of an array: (125, 235, 197, 91, 48)</div>
+
+            <div class="code-block">
+<span class="keyword">.model</span> small
+<span class="keyword">.data</span>
+    <span class="register">DATA1</span> <span class="keyword">db</span> <span class="number">125, 235, 197, 91, 48</span>
+    <span class="register">count</span> <span class="keyword">equ</span> <span class="number">05</span>
+    <span class="register">sum</span> <span class="keyword">dw</span> ?
+<span class="keyword">.code</span>
+<span class="keyword">start:</span>
+    <span class="keyword">mov</span> <span class="register">ax</span>, @data
+    <span class="keyword">mov</span> <span class="register">ds</span>, <span class="register">ax</span>
+    <span class="keyword">mov</span> <span class="register">cx</span>, <span class="register">count</span>
+    <span class="keyword">mov</span> <span class="register">SI</span>, <span class="keyword">OFFSET</span> <span class="register">DATA1</span>
+    <span class="keyword">mov</span> <span class="register">ax</span>, <span class="number">0000h</span>
+<span class="keyword">back:</span>
+    <span class="keyword">add</span> <span class="register">al</span>, [<span class="register">SI</span>]
+    <span class="keyword">adc</span> <span class="register">ah</span>, <span class="number">00</span>     <span class="comment">; Handle carry if sum exceeds 8-bit</span>
+    <span class="keyword">inc</span> <span class="register">SI</span>
+    <span class="keyword">dec</span> <span class="register">cx</span>
+    <span class="keyword">jnz</span> back
+    <span class="keyword">mov</span> <span class="register">sum</span>, <span class="register">ax</span>
+    <span class="keyword">mov</span> <span class="register">ah</span>, <span class="number">4ch</span>
+    <span class="keyword">int</span> <span class="number">21h</span>
+<span class="keyword">end</span> start
+            </div>
+
+            <h3>📌 Maximum Number (2022 exam)</h3>
+
+            <div class="question">Write an assembly program that calculates the maximum: (43h, 13h, 55h, 66h)</div>
+
+            <div class="code-block">
+<span class="keyword">.model</span> small
+<span class="keyword">.data</span>
+    <span class="register">arr</span> <span class="keyword">db</span> <span class="number">43h, 13h, 55h, 66h</span>
+    <span class="register">max</span> <span class="keyword">db</span> ?
+<span class="keyword">.code</span>
+<span class="keyword">start:</span>
+    <span class="keyword">mov</span> <span class="register">ax</span>, @data
+    <span class="keyword">mov</span> <span class="register">ds</span>, <span class="register">ax</span>
+    <span class="keyword">lea</span> <span class="register">bx</span>, <span class="register">arr</span>
+    <span class="keyword">mov</span> <span class="register">cx</span>, <span class="number">04</span>
+    <span class="keyword">mov</span> <span class="register">al</span>, [<span class="register">bx</span>]    <span class="comment">; Assume first element is max</span>
+<span class="keyword">back:</span>
+    <span class="keyword">cmp</span> <span class="register">al</span>, [<span class="register">bx</span>]
+    <span class="keyword">jae</span> skip         <span class="comment">; If AL >= [bx], skip</span>
+    <span class="keyword">mov</span> <span class="register">al</span>, [<span class="register">bx</span>]    <span class="comment">; Update AL with new max</span>
+<span class="keyword">skip:</span>
+    <span class="keyword">inc</span> <span class="register">bx</span>
+    <span class="keyword">loop</span> back
+    <span class="keyword">mov</span> <span class="register">max</span>, <span class="register">al</span>
+    <span class="keyword">mov</span> <span class="register">ah</span>, <span class="number">4ch</span>
+    <span class="keyword">int</span> <span class="number">21h</span>
+<span class="keyword">end</span> start
+            </div>
+        </div>
+
+        <!-- PROBLEMS SECTION -->
+        <div id="problems" class="section problems">
+            <h2>📊 Problems & Calculations</h2>
+
+            <h3>🔥 CPI Calculation (Most Repeated: 2019, 2021, 2023)</h3>
+
+            <div class="question">For a multi-cycle MIPS, calculate the CPI if the instruction mix is:</div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instruction Type</th>
+                        <th>Cycles</th>
+                        <th>Frequency</th>
+                        <th>Contribution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Load</td>
+                        <td>5</td>
+                        <td>10%</td>
+                        <td>0.5</td>
+                    </tr>
+                    <tr>
+                        <td>Store</td>
+                        <td>4</td>
+                        <td>20%</td>
+                        <td>0.8</td>
+                    </tr>
+                    <tr>
+                        <td>R-type</td>
+                        <td>4</td>
+                        <td>50%</td>
+                        <td>2.0</td>
+                    </tr>
+                    <tr>
+                        <td>Branch</td>
+                        <td>3</td>
+                        <td>8%</td>
+                        <td>0.24</td>
+                    </tr>
+                    <tr>
+                        <td>Jump</td>
+                        <td>3</td>
+                        <td>2%</td>
+                        <td>0.06</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="formula-box">
+                <strong>Formula:</strong> CPI = Σ (Cycles<sub>i</sub> × Frequency<sub>i</sub>)
+            </div>
+
+            <div class="answer">
+                <strong>✅ Final CPI = 0.5 + 0.8 + 2.0 + 0.24 + 0.06 = 3.6</strong>
+            </div>
+
+            <h3>🔥 MIPS Rate & Execution Time (2018, 2019)</h3>
+
+            <div class="question">
+                A benchmark program runs on a 40 MHz processor. The executed program consists of 100,000 instructions with a CPI of 1.55. Calculate the MIPS rate.
+            </div>
+
+            <div class="formula-box">
+                <strong>Formula:</strong> MIPS Rate = f / (CPI × 10<sup>6</sup>)
+            </div>
+
+            <ul class="steps">
+                <li><strong>Given:</strong> f (Frequency) = 40 MHz = 40,000,000 Hz</li>
+                <li><strong>CPI</strong> = 1.55</li>
+                <li><strong>Calculate:</strong> MIPS Rate = 40,000,000 / (1.55 × 1,000,000)</li>
+                <li><strong>Result:</strong> MIPS Rate = 40 / 1.55 = <span class="highlight">25.8 MIPS</span></li>
+            </ul>
+
+            <h3>🔥 Disk Performance (2021, 2023)</h3>
+
+            <div class="question">
+                Calculate the Average Access Time for a disk with:
+                <ul style="margin-top: 10px;">
+                    <li>Average Seek Time: 4 ms</li>
+                    <li>Rotation Speed: 15,000 RPM</li>
+                    <li>Sector Size: 512 bytes</li>
+                    <li>Transfer Rate: 100 MB/s</li>
+                </ul>
+            </div>
+
+            <div class="formula-box">
+                <strong>Formulas:</strong><br>
+                • Average Rotational Latency = (1/2) × (60 / RPM)<br>
+                • Access Time = Seek Time + Rotational Latency + Transfer Time
+            </div>
+
+            <ul class="steps">
+                <li><strong>Time for one rotation:</strong> 60 / 15,000 = 0.004 seconds (4 ms)</li>
+                <li><strong>Average Latency:</strong> 1/2 × 4 ms = <span class="highlight">2 ms</span></li>
+                <li><strong>Average Access Time:</strong> 4 ms + 2 ms = <span class="highlight">≈6 ms</span></li>
+            </ul>
+
+            <h3>📌 Cache Design Parameters (2022, 2023)</h3>
+
+            <div class="question">
+                Main Memory: 16 MB, Cache: 64 KB, Block Size: 4 bytes<br>
+                Calculate Tag, Line, and Word bits using Direct Mapping.
+            </div>
+
+            <ul class="steps">
+                <li><strong>Main Memory (16 MB):</strong> 2<sup>24</sup> bytes → 24 bits total address</li>
+                <li><strong>Word (4 bytes):</strong> 2<sup>2</sup> → <span class="highlight">2 bits for Word offset</span></li>
+                <li><strong>Number of Lines:</strong> 64 KB / 4 bytes = 16K = 2<sup>14</sup> → <span class="highlight">14 bits for Line</span></li>
+                <li><strong>Tag bits:</strong> 24 - (14 + 2) = <span class="highlight">8 bits for Tag</span></li>
+            </ul>
+
+            <div class="important-note">
+                <strong>📝 Summary:</strong> Tag = 8 bits | Line = 14 bits | Word = 2 bits
+            </div>
+
+            <h3>📐 Important Formulas Summary</h3>
+
+            <div class="formula-box">
+                <strong>1.</strong> CPI = Σ (Cycles × Instruction Frequency)<br>
+                <strong>2.</strong> MIPS Rate = Clock Frequency / (CPI × 10<sup>6</sup>)<br>
+                <strong>3.</strong> Execution Time (T) = (Instruction Count × CPI) / Frequency<br>
+                <strong>4.</strong> Access Time = Seek Time + Rotational Latency + Transfer Time
+            </div>
+        </div>
+
+        <!-- COMPARISONS SECTION -->
+        <div id="comparisons" class="section comparisons">
+            <h2>⚖️ Comparisons</h2>
+
+            <h3>🔥 SRAM vs. DRAM (Most Repeated)</h3>
+
+            <div class="comparison-table">
+                <div class="comparison-card left">
+                    <h4>SRAM (Static RAM)</h4>
+                    <ul>
+                        <li><strong>Technology:</strong> Digital logic gates (flip-flops)</li>
+                        <li><strong>Refreshing:</strong> NO refreshing needed</li>
+                        <li><strong>Speed:</strong> Much faster</li>
+                        <li><strong>Size/Cost:</strong> Larger, more expensive</li>
+                        <li><strong>Usage:</strong> Cache Memory</li>
+                    </ul>
+                </div>
+                <div class="comparison-card right">
+                    <h4>DRAM (Dynamic RAM)</h4>
+                    <ul>
+                        <li><strong>Technology:</strong> Stores data as charge on capacitors</li>
+                        <li><strong>Refreshing:</strong> Requires periodic refresh</li>
+                        <li><strong>Speed:</strong> Slower than SRAM</li>
+                        <li><strong>Size/Cost:</strong> Smaller, less expensive, higher density</li>
+                        <li><strong>Usage:</strong> Main Memory</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔥 Hard Failure vs. Soft Error (2018, 2021, 2022)</h3>
+
+            <div class="comparison-table">
+                <div class="comparison-card left">
+                    <h4>Hard Failure</h4>
+                    <ul>
+                        <li><strong>Nature:</strong> Permanent physical defect</li>
+                        <li><strong>Effect:</strong> Memory cell cannot store data correctly</li>
+                        <li><strong>Causes:</strong> Manufacturing defects, harsh environment, wear</li>
+                        <li><strong>Recovery:</strong> Requires hardware replacement</li>
+                    </ul>
+                </div>
+                <div class="comparison-card right">
+                    <h4>Soft Error</h4>
+                    <ul>
+                        <li><strong>Nature:</strong> Random, non-destructive, temporary</li>
+                        <li><strong>Effect:</strong> Data altered, but memory not damaged</li>
+                        <li><strong>Causes:</strong> Power supply problems, alpha particles</li>
+                        <li><strong>Recovery:</strong> Can be corrected (ECC, rewriting)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔥 Write Through vs. Write Back (2019, 2021, 2023)</h3>
+
+            <div class="comparison-table">
+                <div class="comparison-card left">
+                    <h4>Write Through</h4>
+                    <ul>
+                        <li><strong>Operation:</strong> Writes to both cache and main memory simultaneously</li>
+                        <li><strong>Advantage:</strong> Main memory always up to date</li>
+                        <li><strong>Disadvantage:</strong> More memory writes (slower)</li>
+                        <li><strong>Use Case:</strong> When data consistency is critical</li>
+                    </ul>
+                </div>
+                <div class="comparison-card right">
+                    <h4>Write Back</h4>
+                    <ul>
+                        <li><strong>Operation:</strong> Writes only to cache, updates memory when replaced</li>
+                        <li><strong>Advantage:</strong> Minimizes memory writes, saves bandwidth</li>
+                        <li><strong>Disadvantage:</strong> Main memory may be stale</li>
+                        <li><strong>Use Case:</strong> Performance-critical applications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>📌 SSD vs. HDD (2022)</h3>
+
+            <div class="comparison-table">
+                <div class="comparison-card left">
+                    <h4>HDD (Hard Disk Drive)</h4>
+                    <ul>
+                        <li><strong>Mechanism:</strong> Rotating magnetic platters and mechanical heads</li>
+                        <li><strong>Speed:</strong> Slower (has seek time + rotational latency)</li>
+                        <li><strong>Durability:</strong> Vulnerable to physical shock</li>
+                        <li><strong>Noise:</strong> Makes noise due to moving parts</li>
+                    </ul>
+                </div>
+                <div class="comparison-card right">
+                    <h4>SSD (Solid State Drive)</h4>
+                    <ul>
+                        <li><strong>Mechanism:</strong> Flash memory (no moving parts)</li>
+                        <li><strong>Speed:</strong> Much faster access time</li>
+                        <li><strong>Durability:</strong> More resistant to shock</li>
+                        <li><strong>Power:</strong> Lower power consumption, silent</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>📌 Batch Multiprogramming vs. Time Sharing (2018, 2022)</h3>
+
+            <div class="comparison-table">
+                <div class="comparison-card left">
+                    <h4>Batch Multiprogramming</h4>
+                    <ul>
+                        <li><strong>Objective:</strong> Maximize processor use (Efficiency)</li>
+                        <li><strong>Directives:</strong> Job Control Language commands provided with job</li>
+                        <li><strong>User Interaction:</strong> Minimal or none</li>
+                    </ul>
+                </div>
+                <div class="comparison-card right">
+                    <h4>Time Sharing</h4>
+                    <ul>
+                        <li><strong>Objective:</strong> Minimize response time</li>
+                        <li><strong>Directives:</strong> Commands entered at terminal by user</li>
+                        <li><strong>User Interaction:</strong> Interactive, real-time</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>📌 Cache Replacement Algorithms (2021, 2022)</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Description</th>
+                        <th>Effectiveness</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>LRU</strong><br>(Least Recently Used)</td>
+                        <td>Replaces the block unused for the longest time</td>
+                        <td>Most effective ✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FIFO</strong><br>(First-In-First-Out)</td>
+                        <td>Replaces the block that has been in cache the longest</td>
+                        <td>Simple, less effective</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LFU</strong><br>(Least Frequently Used)</td>
+                        <td>Replaces the block with fewest hits</td>
+                        <td>Moderate effectiveness</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Random</strong></td>
+                        <td>Picks a line at random to replace</td>
+                        <td>Least effective</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- DIAGRAMS SECTION -->
+        <div id="diagrams" class="section diagrams">
+            <h2>📐 Diagrams & Visual Concepts</h2>
+
+            <h3>🔥 OS Structure & Layers (2019, 2021)</h3>
+
+            <div class="diagram">
+                <p style="text-align: center; font-weight: 700; margin-bottom: 20px;">Computer Hardware and Software Structure</p>
+                <div class="hierarchy">
+                    <div class="hierarchy-item" style="width: 300px;">User Applications</div>
+                    <div class="hierarchy-arrow">⬇</div>
+                    <div class="hierarchy-item" style="width: 350px;">Utilities</div>
+                    <div class="hierarchy-arrow">⬇</div>
+                    <div class="hierarchy-item" style="width: 400px;">Operating System (Kernel)</div>
+                    <div class="hierarchy-arrow">⬇</div>
+                    <div class="hierarchy-item" style="width: 450px;">Computer Hardware (CPU, Memory, I/O)</div>
+                </div>
+            </div>
+
+            <h3>🔥 Von Neumann Architecture (2022, 2023)</h3>
+
+            <div class="diagram">
+                <p style="text-align: center; font-weight: 700; margin-bottom: 20px;">Von Neumann Machine Structure</p>
+                <div class="von-neumann">
+                    <div class="component">
+                        <strong>Input Devices</strong><br>
+                        (Keyboard, Mouse, etc.)
+                    </div>
+                    <div class="component cpu">
+                        <strong>CPU</strong><br>
+                        • Control Unit (CU)<br>
+                        • Arithmetic Logic Unit (ALU)
+                    </div>
+                    <div class="component">
+                        <strong>Output Devices</strong><br>
+                        (Monitor, Printer, etc.)
+                    </div>
+                </div>
+                <div class="bus-connection">⬍ System Bus ⬍</div>
+                <div style="display: flex; justify-content: center; margin-top: 20px;">
+                    <div class="component" style="width: 80%;">
+                        <strong>Main Memory Unit</strong><br>
+                        (Stores Data & Instructions)
+                    </div>
+                </div>
+            </div>
+
+            <div class="important-note">
+                <strong>Key Points:</strong> Von Neumann architecture is based on the stored-program computer concept. It's classified as SISD (Single Instruction Single Data).
+            </div>
+
+            <h3>🔥 Memory Hierarchy (2018, 2023)</h3>
+
+            <div class="diagram">
+                <p style="text-align: center; font-weight: 700; margin-bottom: 20px;">Computer Memory Hierarchy</p>
+                <div class="hierarchy">
+                    <div class="hierarchy-item" style="width: 250px; background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                        Registers<br>
+                        <small>Fastest • Smallest • Most Expensive</small>
+                    </div>
+                    <div class="hierarchy-arrow">⬇ Speed Decreases</div>
+                    <div class="hierarchy-item" style="width: 350px; background: linear-gradient(135deg, #e67e22, #d35400);">
+                        Cache Memory (SRAM)<br>
+                        <small>Very Fast • Small • Expensive</small>
+                    </div>
+                    <div class="hierarchy-arrow">⬇ Capacity Increases</div>
+                    <div class="hierarchy-item" style="width: 450px; background: linear-gradient(135deg, #f39c12, #e67e22);">
+                        Main Memory (RAM/DRAM)<br>
+                        <small>Fast • Medium • Moderate Cost</small>
+                    </div>
+                    <div class="hierarchy-arrow">⬇ Cost Decreases</div>
+                    <div class="hierarchy-item" style="width: 550px; background: linear-gradient(135deg, #27ae60, #229954);">
+                        Secondary Memory (SSD, HDD)<br>
+                        <small>Slower • Large • Inexpensive</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="important-note">
+                <strong>Remember:</strong> As you go down the hierarchy:
+                <ul style="margin-top: 10px;">
+                    <li>✅ Cost per bit DECREASES</li>
+                    <li>✅ Capacity INCREASES</li>
+                    <li>✅ Access time INCREASES (Slower)</li>
+                    <li>✅ Frequency of access by CPU DECREASES</li>
+                </ul>
+            </div>
+
+            <h3>📌 Cache/Main Memory Structure (2021, 2022)</h3>
+
+            <div class="diagram">
+                <p style="text-align: center; font-weight: 700; margin-bottom: 20px;">Virtual Memory & Cache Relationship</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                    <div class="component">
+                        <strong>Virtual Memory</strong><br>
+                        Logical addresses<br>
+                        (Program's view)
+                    </div>
+                    <div class="component cpu">
+                        <strong>MMU</strong><br>
+                        Memory Management Unit<br>
+                        (Translation)
+                    </div>
+                    <div class="component">
+                        <strong>Physical Memory</strong><br>
+                        Real addresses<br>
+                        + Cache
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 40px 20px; background: rgba(255, 255, 255, 0.95); border-radius: 15px; margin-top: 30px;">
+            <p style="font-family: 'Space Mono', monospace; font-size: 1.2em; color: var(--primary);">
+                🎓 Good Luck with Your Exam! 🎓
+            </p>
+            <p style="margin-top: 10px; color: var(--text);">
+                Focus on the most repeated questions (marked with badges) and master the formulas!
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Add animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.question-card').forEach((card) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

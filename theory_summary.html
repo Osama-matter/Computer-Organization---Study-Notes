@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Organization - Theory Summary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #fdfcfb;
+            --bg-secondary: #f7f5f3;
+            --bg-accent: #e8e5e0;
+            --text-primary: #1a1715;
+            --text-secondary: #4a4440;
+            --accent-primary: #8b4513;
+            --accent-secondary: #c17849;
+            --highlight-bg: #fff4e6;
+            --border-color: #d4cfc9;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .nav-buttons {
+            margin-top: 1.5rem;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--accent-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-secondary);
+            font-weight: 700;
+        }
+
+        section h3 {
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .definition {
+            background: var(--highlight-bg);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .key-point {
+            background: var(--bg-secondary);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent-secondary);
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--accent-primary);
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Computer Organization & Architecture</h1>
+            <p>Complete Theory Summary</p>
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">← Back to Home</a>
+                <a href="exam_questions.html" class="nav-btn">View Exam Questions →</a>
+            </div>
+        </header>
+
+        <section>
+            <h2>📖 Study Instructions</h2>
+            <p>This comprehensive summary covers all chapters from the textbook. Use it to:</p>
+            <ul>
+                <li>Review key concepts before the exam</li>
+                <li>Understand the theory behind exam questions</li>
+                <li>Study definitions, comparisons, and formulas</li>
+            </ul>
+            <div class="key-point">
+                <strong>Pro Tip:</strong> Read this theory summary first, then practice with the exam questions to test your understanding!
+            </div>
+        </section>
+
+        <section>
+            <h2>Chapter 1: Introduction</h2>
+            <h3>Computer Architecture vs Organization</h3>
+            <div class="definition">
+                <strong>Architecture:</strong> WHAT the computer does (instruction set, I/O, addressing)<br>
+                <strong>Organization:</strong> HOW it does it (control signals, interfaces, memory technology)
+            </div>
+
+            <h3>Basic Components</h3>
+            <ul>
+                <li><strong>CPU:</strong> Control Unit + ALU + Registers</li>
+                <li><strong>Main Memory:</strong> RAM (volatile), ROM (non-volatile)</li>
+                <li><strong>I/O Devices:</strong> Input/output peripherals</li>
+                <li><strong>System Interconnection:</strong> Bus structures</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Chapter 2: Evolution & Performance</h2>
+            <div class="definition">
+                <strong>Von Neumann Architecture:</strong>
+                <ul>
+                    <li>Data and instructions in single read-write memory</li>
+                    <li>Memory addressable by location</li>
+                    <li>Sequential execution</li>
+                    <li>Classified as SISD</li>
+                </ul>
+            </div>
+
+            <h3>Key Registers</h3>
+            <table>
+                <tr>
+                    <th>Register</th>
+                    <th>Function</th>
+                </tr>
+                <tr>
+                    <td><strong>PC</strong></td>
+                    <td>Program Counter - Address of next instruction</td>
+                </tr>
+                <tr>
+                    <td><strong>MAR/MBR</strong></td>
+                    <td>Memory Address/Buffer Register</td>
+                </tr>
+                <tr>
+                    <td><strong>IR</strong></td>
+                    <td>Instruction Register - 8-bit opcode</td>
+                </tr>
+                <tr>
+                    <td><strong>AC</strong></td>
+                    <td>Accumulator - ALU operands/results</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Chapter 4: Cache Memory</h2>
+            <div class="definition">
+                <strong>Cache Mapping Techniques:</strong>
+                <ul>
+                    <li><strong>Direct:</strong> i = j mod m (simple, can thrash)</li>
+                    <li><strong>Associative:</strong> Any line (flexible, expensive)</li>
+                    <li><strong>Set-Associative:</strong> Compromise (k-way)</li>
+                </ul>
+            </div>
+
+            <h3>Write Policies</h3>
+            <table>
+                <tr>
+                    <th>Policy</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><strong>Write Through</strong></td>
+                    <td>Update cache AND memory (simple, more traffic)</td>
+                </tr>
+                <tr>
+                    <td><strong>Write Back</strong></td>
+                    <td>Update cache only, write to memory when replaced (efficient)</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Chapter 5: Internal Memory</h2>
+            <h3>SRAM vs DRAM</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>SRAM</th>
+                    <th>DRAM</th>
+                </tr>
+                <tr>
+                    <td>Technology</td>
+                    <td>Flip-flops</td>
+                    <td>Capacitors</td>
+                </tr>
+                <tr>
+                    <td>Refresh</td>
+                    <td>Not required</td>
+                    <td>Required</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>Faster</td>
+                    <td>Slower</td>
+                </tr>
+                <tr>
+                    <td>Usage</td>
+                    <td>Cache</td>
+                    <td>Main memory</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Chapter 6: External Memory</h2>
+            <h3>Disk Performance</h3>
+            <div class="definition">
+                <strong>Access Time = Seek Time + Rotational Latency</strong>
+            </div>
+
+            <h3>SSD vs HDD</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>SSD</th>
+                    <th>HDD</th>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>Much faster</td>
+                    <td>Slower</td>
+                </tr>
+                <tr>
+                    <td>Mechanism</td>
+                    <td>Flash memory</td>
+                    <td>Rotating platters</td>
+                </tr>
+                <tr>
+                    <td>Durability</td>
+                    <td>Shock resistant</td>
+                    <td>Vulnerable</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Chapter 8: Operating System Support</h2>
+            <div class="definition">
+                <strong>OS Objectives:</strong>
+                <ul>
+                    <li><strong>Convenience:</strong> Easy to use</li>
+                    <li><strong>Efficiency:</strong> Efficient resource use</li>
+                </ul>
+            </div>
+
+            <h3>Scheduling Types</h3>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Function</th>
+                </tr>
+                <tr>
+                    <td>Long-Term</td>
+                    <td>Admits programs to system</td>
+                </tr>
+                <tr>
+                    <td>Short-Term (Dispatcher)</td>
+                    <td>Decides which ready process runs next</td>
+                </tr>
+                <tr>
+                    <td>Medium-Term</td>
+                    <td>Manages swapping</td>
+                </tr>
+            </table>
+
+            <h3>Memory Management</h3>
+            <ul>
+                <li><strong>Paging:</strong> Fixed-size frames, page table mapping</li>
+                <li><strong>Segmentation:</strong> Variable-sized logical segments</li>
+                <li><strong>Virtual Memory:</strong> Demand paging based on locality</li>
+                <li><strong>TLB:</strong> Cache for page table entries</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Compiled from William Stallings - Computer Organization and Architecture</p>
+            <p style="margin-top: 15px;">
+                <a href="index.html" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">← Back to Home</a> | 
+                <a href="exam_questions.html" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">View Exam Questions →</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

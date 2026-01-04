@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computer Organization & Architecture - Study Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Computer Architecture Study Guide - Complete</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Crimson+Pro:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #fdfcfb;
-            --bg-secondary: #f7f5f3;
-            --bg-accent: #e8e5e0;
-            --text-primary: #1a1715;
-            --text-secondary: #4a4440;
-            --accent-primary: #8b4513;
-            --accent-secondary: #c17849;
-            --highlight-bg: #fff4e6;
-            --border-color: #d4cfc9;
-            --shadow: rgba(0, 0, 0, 0.08);
+            --primary: #2d3561;
+            --secondary: #e94560;
+            --accent: #f4a261;
+            --success: #2a9d8f;
+            --bg: #f8f9fa;
         }
 
         * {
@@ -27,1213 +22,167 @@
 
         body {
             font-family: 'Crimson Pro', serif;
-            line-height: 1.7;
-            color: var(--text-primary);
-            background: var(--bg-primary);
-            font-size: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
         .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 3rem;
-            padding: 2rem;
-        }
-
-        @media (max-width: 968px) {
-            .container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        /* Header */
-        header {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 3rem 0 2rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        header h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            color: var(--accent-primary);
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        /* Table of Contents */
-        .toc {
-            position: sticky;
-            top: 2rem;
-            height: fit-content;
-            background: var(--bg-secondary);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .toc h2 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--accent-primary);
-            font-weight: 600;
-        }
-
-        .toc ul {
-            list-style: none;
-        }
-
-        .toc li {
-            margin-bottom: 0.5rem;
-        }
-
-        .toc a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            display: block;
-            padding: 0.3rem 0.5rem;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-        }
-
-        .toc a:hover {
-            background: var(--bg-accent);
-            color: var(--accent-primary);
-            transform: translateX(4px);
-        }
-
-        @media (max-width: 968px) {
-            .toc {
-                position: relative;
-                top: 0;
-            }
-        }
-
-        /* Main Content */
-        main {
-            max-width: 900px;
-        }
-
-        section {
-            margin-bottom: 4rem;
-            padding: 2rem;
+            max-width: 800px;
             background: white;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        section h2 {
-            font-size: 2rem;
-            color: var(--accent-primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent-secondary);
-            font-weight: 700;
-        }
-
-        section h3 {
-            font-size: 1.5rem;
-            color: var(--accent-secondary);
-            margin: 2rem 0 1rem;
-            font-weight: 600;
-        }
-
-        section h4 {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            margin: 1.5rem 0 0.8rem;
-            font-weight: 600;
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
-
-        /* Highlighted Concepts */
-        .definition {
-            background: var(--highlight-bg);
-            border-left: 4px solid var(--accent-primary);
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 4px;
-        }
-
-        .definition strong {
-            color: var(--accent-primary);
-            font-weight: 700;
-            font-size: 1.05rem;
-        }
-
-        .key-point {
-            background: var(--bg-secondary);
-            padding: 1rem 1.5rem;
-            margin: 1rem 0;
-            border-radius: 4px;
-            border-left: 3px solid var(--accent-secondary);
-        }
-
-        /* Lists */
-        ul, ol {
-            margin: 1rem 0 1rem 2rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        ul li::marker {
-            color: var(--accent-secondary);
-        }
-
-        /* Code blocks */
-        code {
-            font-family: 'IBM Plex Mono', monospace;
-            background: var(--bg-accent);
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-size: 0.9em;
-            color: var(--accent-primary);
-        }
-
-        .formula {
-            font-family: 'IBM Plex Mono', monospace;
-            background: var(--bg-secondary);
-            padding: 1rem;
-            border-radius: 4px;
-            margin: 1rem 0;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
-            border: 1px solid var(--border-color);
         }
 
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: white;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
+        h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5em;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 800;
         }
 
-        th {
-            background: var(--accent-primary);
-            color: white;
-            padding: 0.8rem;
-            text-align: left;
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--secondary);
+            margin-bottom: 50px;
             font-weight: 600;
         }
 
-        td {
-            padding: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        tr:hover {
-            background: var(--bg-secondary);
-        }
-
-        /* Comparison boxes */
-        .comparison {
+        .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .comparison-item {
-            background: var(--bg-secondary);
-            padding: 1rem;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
+        .card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 3px solid var(--primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
         }
 
-        .comparison-item h5 {
-            color: var(--accent-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--secondary);
         }
 
-        /* Footer */
-        footer {
-            grid-column: 1 / -1;
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.4em;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .card-description {
+            color: #6c757d;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .features {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .features h3 {
+            font-family: 'Space Mono', monospace;
+            color: var(--primary);
+            margin-bottom: 20px;
             text-align: center;
-            padding: 2rem 0;
-            border-top: 2px solid var(--border-color);
-            color: var(--text-secondary);
-            font-style: italic;
         }
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 2rem;
+        .features ul {
+            list-style: none;
+            padding: 0;
         }
 
-        /* Print styles */
-        @media print {
-            .toc {
-                position: relative;
-                page-break-inside: avoid;
+        .features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #495057;
+        }
+
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
             }
-            
-            section {
-                page-break-inside: avoid;
+
+            h1 {
+                font-size: 1.8em;
             }
-            
-            body {
-                font-size: 12pt;
+
+            .cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Computer Organization & Architecture</h1>
-            <p>Comprehensive Study Guide</p>
-        </header>
+        <h1>🎓 Computer Architecture & OS</h1>
+        <p class="subtitle">Complete Study Guide for Exam Success</p>
 
-        <!-- Table of Contents -->
-        <aside class="toc">
-            <h2>Contents</h2>
+        <div class="cards">
+            <a href="theory_summary.html" class="card">
+                <div class="card-icon">📚</div>
+                <div class="card-title">Theory Summary</div>
+                <div class="card-description">
+                    Comprehensive chapter-by-chapter summary covering all concepts from the textbook
+                </div>
+            </a>
+
+            <a href="exam_questions.html" class="card">
+                <div class="card-icon">📝</div>
+                <div class="card-title">Exam Questions</div>
+                <div class="card-description">
+                    Most repeated questions, assembly code, problems, and solutions from past exams
+                </div>
+            </a>
+        </div>
+
+        <div class="features">
+            <h3>What's Inside:</h3>
             <ul>
-                <li><a href="#ch1">Chapter 1: Introduction</a></li>
-                <li><a href="#ch2">Chapter 2: Evolution & Performance</a></li>
-                <li><a href="#ch3">Chapter 3: Function & Interconnection</a></li>
-                <li><a href="#ch4">Chapter 4: Cache Memory</a></li>
-                <li><a href="#ch5">Chapter 5: Internal Memory</a></li>
-                <li><a href="#ch6">Chapter 6: External Memory</a></li>
-                <li><a href="#ch8">Chapter 8: Operating System Support</a></li>
+                <li><strong>Theory Summary:</strong> All chapters organized with key concepts, definitions, and comparisons</li>
+                <li><strong>MCQ Questions:</strong> Most repeated questions with badges showing frequency</li>
+                <li><strong>Assembly Code:</strong> Complete solutions with step-by-step explanations</li>
+                <li><strong>Calculations:</strong> CPI, MIPS, disk performance problems with formulas</li>
+                <li><strong>Comparisons:</strong> SRAM vs DRAM, SSD vs HDD, and more</li>
+                <li><strong>Diagrams:</strong> Visual representations of architectures and memory hierarchy</li>
+                <li><strong>Mobile Responsive:</strong> Study on any device, anywhere</li>
             </ul>
-        </aside>
-
-        <!-- Main Content -->
-        <main>
-            <!-- Chapter 1 -->
-            <section id="ch1">
-                <h2>Chapter 1: Introduction</h2>
-
-                <h3>Representation of Basic Information</h3>
-                <div class="definition">
-                    <strong>Digital vs Analog Signals:</strong>
-                    <ul>
-                        <li><strong>Analog signals:</strong> Continuous in nature</li>
-                        <li><strong>Digital signals:</strong> Discrete in nature</li>
-                    </ul>
-                </div>
-
-                <p>Computers are digital devices that work with two signal levels:</p>
-                <ul>
-                    <li><strong>HIGH:</strong> Typically 5V or 12V (represented as 1)</li>
-                    <li><strong>LOW:</strong> Typically 0V (represented as 0)</li>
-                </ul>
-
-                <div class="definition">
-                    <strong>Binary Number System:</strong> Uses symbols 0 and 1 to represent information and manipulate data in computers.
-                    <ul>
-                        <li><strong>Bit:</strong> Binary digit (0 or 1)</li>
-                        <li><strong>Nibble:</strong> 4 bits</li>
-                        <li><strong>Byte:</strong> 8 bits</li>
-                    </ul>
-                </div>
-
-                <h3>Computer Architecture vs Organization</h3>
-                
-                <div class="comparison">
-                    <div class="comparison-item">
-                        <h5>Computer Architecture</h5>
-                        <ul>
-                            <li>Describes <strong>what</strong> the computer does</li>
-                            <li>Functional behavior of system</li>
-                            <li>Visible to programmers</li>
-                            <li>Direct impact on program execution</li>
-                            <li>Examples: instruction set, data representation, I/O mechanisms, addressing techniques</li>
-                        </ul>
-                    </div>
-                    <div class="comparison-item">
-                        <h5>Computer Organization</h5>
-                        <ul>
-                            <li>Describes <strong>how</strong> it does it</li>
-                            <li>Structural relationships</li>
-                            <li>Hardware details transparent to programmers</li>
-                            <li>Examples: control signals, interfaces, memory technology</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3>System Description Levels</h3>
-                <ol>
-                    <li><strong>Processor-Memory-Switch (PMS) level:</strong> Architect's view</li>
-                    <li><strong>Instruction set level:</strong> Function of each instruction</li>
-                    <li><strong>Register transfer level:</strong> Hardware structure visibility</li>
-                    <li><strong>Logic gate level:</strong> Gates and flip-flops</li>
-                    <li><strong>Circuit level:</strong> Resistors, transistors, capacitors, diodes</li>
-                    <li><strong>Mask level:</strong> Silicon structures and IC layout</li>
-                </ol>
-
-                <h3>Basic Computer Functions</h3>
-                <ul>
-                    <li><strong>Data Processing:</strong> Computation and manipulation</li>
-                    <li><strong>Data Storage:</strong> Temporary and permanent storage</li>
-                    <li><strong>Data Movement:</strong> Input/output operations</li>
-                    <li><strong>Control:</strong> Managing all operations</li>
-                </ul>
-
-                <h3>Four Main Structural Components</h3>
-                <ol>
-                    <li><strong>CPU:</strong> Central Processing Unit
-                        <ul>
-                            <li>Control Unit: Generates control signals</li>
-                            <li>Arithmetic Logic Unit (ALU): Executes operations</li>
-                            <li>Registers: Store data temporarily</li>
-                        </ul>
-                    </li>
-                    <li><strong>Main Memory:</strong> Primary storage (RAM, ROM)</li>
-                    <li><strong>I/O Devices:</strong> Input and output peripherals</li>
-                    <li><strong>System Interconnection:</strong> Bus structures</li>
-                </ol>
-
-                <h3>Memory Types</h3>
-                <div class="comparison">
-                    <div class="comparison-item">
-                        <h5>Volatile Memory</h5>
-                        <p><strong>RAM (Random Access Memory):</strong> Loses data when power is off</p>
-                    </div>
-                    <div class="comparison-item">
-                        <h5>Non-Volatile Memory</h5>
-                        <ul>
-                            <li>ROM (Read Only Memory)</li>
-                            <li>PROM (Programmable ROM)</li>
-                            <li>EPROM (Erasable PROM)</li>
-                            <li>EEPROM (Electrically Erasable PROM)</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Chapter 2 -->
-            <section id="ch2">
-                <h2>Chapter 2: Computer Evolution and Performance</h2>
-
-                <h3>Von Neumann Machine</h3>
-                <div class="definition">
-                    <strong>Von Neumann Architecture</strong> is based on three key concepts:
-                    <ol>
-                        <li>Data and instructions stored in single read-write memory</li>
-                        <li>Memory contents addressable by location</li>
-                        <li>Execution occurs sequentially</li>
-                    </ol>
-                </div>
-
-                <h3>IAS Computer Structure</h3>
-                <div class="key-point">
-                    <strong>Key Registers:</strong>
-                    <ul>
-                        <li><strong>MBR (Memory Buffer Register):</strong> Contains word to be stored/received</li>
-                        <li><strong>MAR (Memory Address Register):</strong> Specifies memory address</li>
-                        <li><strong>IR (Instruction Register):</strong> Contains 8-bit opcode</li>
-                        <li><strong>IBR (Instruction Buffer Register):</strong> Temporarily holds right-hand instruction</li>
-                        <li><strong>PC (Program Counter):</strong> Address of next instruction</li>
-                        <li><strong>AC (Accumulator):</strong> Holds ALU operands/results</li>
-                        <li><strong>MQ (Multiplier Quotient):</strong> Holds operands/results</li>
-                    </ul>
-                </div>
-
-                <h3>Microprocessor Speed Enhancement Techniques</h3>
-                <ul>
-                    <li><strong>Pipelining:</strong> Overlapping instruction execution</li>
-                    <li><strong>Branch Prediction:</strong> Predicting execution paths</li>
-                    <li><strong>Data Flow Analysis:</strong> Optimizing instruction scheduling</li>
-                    <li><strong>Speculative Execution:</strong> Executing ahead of time</li>
-                </ul>
-
-                <h3>Problems with Clock Speed and Logic Density</h3>
-                <ol>
-                    <li><strong>Power:</strong> Increased power density and heat dissipation</li>
-                    <li><strong>RC Delay:</strong> Wire resistance and capacitance limits</li>
-                    <li><strong>Memory Latency:</strong> Memory speeds lag processor speeds</li>
-                </ol>
-
-                <h3>Improvement Approaches</h3>
-                <ul>
-                    <li>Increase hardware speed of processor</li>
-                    <li>Increase size and speed of caches</li>
-                    <li>Change processor organization and architecture</li>
-                    <li><strong>Multicore approach:</strong> Multiple processors on same chip</li>
-                </ul>
-
-                <div class="definition">
-                    <strong>Embedded System:</strong> Combination of computer hardware and software (and perhaps additional mechanical parts) designed to perform a dedicated function. Often part of a larger system (e.g., antilock braking system in a car).
-                </div>
-
-                <h3>Moore's Law</h3>
-                <div class="key-point">
-                    <p>Number of transistors on a chip doubles every 18 months, leading to:</p>
-                    <ul>
-                        <li>Decreased cost per transistor</li>
-                        <li>Shortened electrical paths → increased speed</li>
-                        <li>Smaller physical size</li>
-                        <li>Reduced power requirements</li>
-                        <li>Fewer interchip connections</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Chapter 3 -->
-            <section id="ch3">
-                <h2>Chapter 3: Function and Interconnection</h2>
-
-                <h3>Instruction Cycle</h3>
-                <div class="definition">
-                    <strong>Instruction Cycle:</strong> The processing required for a single instruction, consisting of:
-                    <ol>
-                        <li><strong>Fetch Cycle:</strong> Retrieve instruction from memory</li>
-                        <li><strong>Execute Cycle:</strong> Perform the instruction</li>
-                    </ol>
-                </div>
-
-                <h3>Instruction Cycle States</h3>
-                <ul>
-                    <li><strong>Instruction Address Calculation (iac):</strong> Determine next instruction address</li>
-                    <li><strong>Instruction Fetch (if):</strong> Read instruction from memory</li>
-                    <li><strong>Instruction Operation Decoding (iod):</strong> Analyze instruction</li>
-                    <li><strong>Operand Address Calculation (oac):</strong> Determine operand address</li>
-                    <li><strong>Operand Fetch (of):</strong> Fetch the operand</li>
-                    <li><strong>Data Operation (do):</strong> Perform the operation</li>
-                    <li><strong>Operand Store (os):</strong> Write result</li>
-                </ul>
-
-                <h3>Four Instruction Categories</h3>
-                <ol>
-                    <li><strong>Processor-Memory:</strong> Data transfer between CPU and memory</li>
-                    <li><strong>Processor-I/O:</strong> Data transfer between CPU and I/O</li>
-                    <li><strong>Data Processing:</strong> Arithmetic and logic operations</li>
-                    <li><strong>Control:</strong> Sequence alteration</li>
-                </ol>
-
-                <h3>Interrupts</h3>
-                <div class="definition">
-                    <strong>Interrupt:</strong> A mechanism that allows other modules to interrupt normal processing, improving efficiency.
-                </div>
-
-                <h3>Common Interrupt Classes</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Program</td>
-                            <td>Errors in program execution</td>
-                        </tr>
-                        <tr>
-                            <td>Timer</td>
-                            <td>Generated by processor's internal timer</td>
-                        </tr>
-                        <tr>
-                            <td>I/O</td>
-                            <td>Signals from I/O controllers</td>
-                        </tr>
-                        <tr>
-                            <td>Hardware Failure</td>
-                            <td>Power failure or memory parity error</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Dealing with Multiple Interrupts</h3>
-                <ol>
-                    <li><strong>Disable Interrupts:</strong> Process one interrupt at a time</li>
-                    <li><strong>Define Priorities:</strong> Allow higher-priority interrupts to interrupt lower-priority handlers</li>
-                </ol>
-
-                <h3>Interconnection Structures</h3>
-                <div class="comparison">
-                    <div class="comparison-item">
-                        <h5>Bus Interconnection</h5>
-                        <ul>
-                            <li>Shared transmission medium</li>
-                            <li>Multiple devices connect</li>
-                            <li>Simple but can be bottleneck</li>
-                        </ul>
-                    </div>
-                    <div class="comparison-item">
-                        <h5>Point-to-Point</h5>
-                        <ul>
-                            <li>Direct connections between pairs</li>
-                            <li>Lower latency</li>
-                            <li>Better scalability</li>
-                            <li>Example: QPI, PCIe</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3>Bus Structure</h3>
-                <ul>
-                    <li><strong>Data Bus:</strong> Transfers data (width determines bits per transfer)</li>
-                    <li><strong>Address Bus:</strong> Identifies source/destination (width determines max memory)</li>
-                    <li><strong>Control Bus:</strong> Controls access and timing
-                        <ul>
-                            <li>Memory read/write</li>
-                            <li>I/O read/write</li>
-                            <li>Bus request/grant</li>
-                            <li>Interrupt signals</li>
-                            <li>Clock and reset</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <div class="key-point">
-                    <strong>PCI:</strong> Popular high-bandwidth, processor-independent bus<br>
-                    <strong>PCIe:</strong> Point-to-point interconnect replacing traditional bus architectures
-                </div>
-            </section>
-
-            <!-- Chapter 4 -->
-            <section id="ch4">
-                <h2>Chapter 4: Cache Memory</h2>
-
-                <h3>Key Memory Characteristics</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Characteristic</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Location</td>
-                            <td>Internal (registers, cache, main memory) or External (peripherals)</td>
-                        </tr>
-                        <tr>
-                            <td>Capacity</td>
-                            <td>Bytes for internal; varies for external</td>
-                        </tr>
-                        <tr>
-                            <td>Unit of Transfer</td>
-                            <td>Number of bits transferred at once</td>
-                        </tr>
-                        <tr>
-                            <td>Access Method</td>
-                            <td>Sequential, Direct, Random, Associative</td>
-                        </tr>
-                        <tr>
-                            <td>Performance</td>
-                            <td>Access time, cycle time, transfer rate</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Methods of Accessing Data</h3>
-                <div class="comparison">
-                    <div class="comparison-item">
-                        <h5>Sequential Access</h5>
-                        <p>Linear sequence; variable access time (e.g., tape)</p>
-                    </div>
-                    <div class="comparison-item">
-                        <h5>Direct Access</h5>
-                        <p>Jump to vicinity then sequential; variable access time (e.g., disk)</p>
-                    </div>
-                    <div class="comparison-item">
-                        <h5>Random Access</h5>
-                        <p>Unique physical address; constant access time (e.g., RAM)</p>
-                    </div>
-                    <div class="comparison-item">
-                        <h5>Associative</h5>
-                        <p>Retrieved by content; constant time (e.g., cache)</p>
-                    </div>
-                </div>
-
-                <h3>Performance Parameters</h3>
-                <ol>
-                    <li><strong>Access Time (Latency):</strong> Time to perform read/write operation</li>
-                    <li><strong>Memory Cycle Time:</strong> Access time + recovery time before next access</li>
-                    <li><strong>Transfer Rate:</strong> Rate of data transfer (1/cycle time for RAM)</li>
-                </ol>
-
-                <h3>Cache Memory Principles</h3>
-                <div class="definition">
-                    <strong>Cache Memory:</strong> Small, fast memory between CPU and main memory that stores frequently accessed data to reduce average access time.
-                </div>
-
-                <div class="key-point">
-                    <strong>Principle of Locality:</strong>
-                    <ul>
-                        <li><strong>Temporal Locality:</strong> Recently accessed items likely to be accessed again soon</li>
-                        <li><strong>Spatial Locality:</strong> Items near recently accessed items likely to be accessed</li>
-                    </ul>
-                </div>
-
-                <h3>Cache Mapping Techniques</h3>
-                
-                <h4>1. Direct Mapping</h4>
-                <div class="formula">i = j modulo m</div>
-                <p>Where: i = cache line number, j = main memory block number, m = number of cache lines</p>
-                <ul>
-                    <li><strong>Advantages:</strong> Simple, inexpensive</li>
-                    <li><strong>Disadvantages:</strong> Fixed location can cause thrashing</li>
-                </ul>
-
-                <h4>2. Associative Mapping</h4>
-                <ul>
-                    <li>Any memory block can load into any cache line</li>
-                    <li>Requires simultaneous examination of all tags</li>
-                    <li><strong>Advantages:</strong> Flexible, no thrashing</li>
-                    <li><strong>Disadvantages:</strong> Complex, expensive</li>
-                </ul>
-
-                <h4>3. Set-Associative Mapping</h4>
-                <div class="formula">m = v × k, where i = j modulo v</div>
-                <p>Where: m = total lines, v = number of sets, k = lines per set (k-way associative)</p>
-                <ul>
-                    <li>Compromise between direct and associative</li>
-                    <li>Block maps to specific set, can go in any line within set</li>
-                </ul>
-
-                <h3>Replacement Algorithms</h3>
-                <ul>
-                    <li><strong>LRU (Least Recently Used):</strong> Replace block unused longest - most effective</li>
-                    <li><strong>FIFO (First-In-First-Out):</strong> Replace oldest block - simple</li>
-                    <li><strong>LFU (Least Frequently Used):</strong> Replace least referenced block</li>
-                    <li><strong>Random:</strong> Random replacement</li>
-                </ul>
-
-                <h3>Write Policies</h3>
-                <div class="comparison">
-                    <div class="comparison-item">
-                        <h5>Write Through</h5>
-                        <ul>
-                            <li>All writes to cache AND main memory</li>
-                            <li>Simple</li>
-                            <li>Generates memory traffic</li>
-                        </ul>
-                    </div>
-                    <div class="comparison-item">
-                        <h5>Write Back</h5>
-                        <ul>
-                            <li>Updates only in cache initially</li>
-                            <li>Written to memory when replaced</li>
-                            <li>Minimizes memory writes</li>
-                            <li>More complex</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3>Virtual Memory</h3>
-                <div class="definition">
-                    <strong>Virtual Memory:</strong> Facility that allows programs to address memory from a logical point of view, without regard to physical memory available.
-                </div>
-
-                <div class="key-point">
-                    <strong>MMU (Memory Management Unit):</strong> Hardware module that translates each virtual address into a physical address in main memory.
-                </div>
-
-                <h3>Cache Types</h3>
-                <ul>
-                    <li><strong>Logical Cache (Virtual Cache):</strong> Stores data using virtual addresses</li>
-                    <li><strong>Physical Cache:</strong> Stores data using physical addresses</li>
-                    <li><strong>Unified Cache:</strong> Single cache for instructions and data</li>
-                    <li><strong>Split Cache:</strong> Separate instruction and data caches (eliminates contention)</li>
-                </ul>
-            </section>
-
-            <!-- Chapter 5 -->
-            <section id="ch5">
-                <h2>Chapter 5: Internal Memory</h2>
-
-                <h3>DRAM vs SRAM</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Characteristic</th>
-                            <th>DRAM</th>
-                            <th>SRAM</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Storage</td>
-                            <td>Charge on capacitors</td>
-                            <td>Flip-flop logic gates</td>
-                        </tr>
-                        <tr>
-                            <td>Refresh</td>
-                            <td>Required periodically</td>
-                            <td>Not required</td>
-                        </tr>
-                        <tr>
-                            <td>Density</td>
-                            <td>Higher (smaller cells)</td>
-                            <td>Lower (larger cells)</td>
-                        </tr>
-                        <tr>
-                            <td>Cost</td>
-                            <td>Less expensive</td>
-                            <td>More expensive</td>
-                        </tr>
-                        <tr>
-                            <td>Speed</td>
-                            <td>Slower</td>
-                            <td>Faster</td>
-                        </tr>
-                        <tr>
-                            <td>Usage</td>
-                            <td>Main memory</td>
-                            <td>Cache memory</td>
-                        </tr>
-                        <tr>
-                            <td>Volatility</td>
-                            <td>Volatile</td>
-                            <td>Volatile</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Read-Only Memory Types</h3>
-                <ul>
-                    <li><strong>ROM:</strong> Data wired during fabrication; cannot be changed</li>
-                    <li><strong>PROM (Programmable ROM):</strong> Written once electrically after fabrication</li>
-                    <li><strong>EPROM (Erasable PROM):</strong> Erased with UV light; multiple updates</li>
-                    <li><strong>EEPROM:</strong> Electrically erasable; byte-level updates; more expensive</li>
-                    <li><strong>Flash Memory:</strong> Block-level electrical erasure; between EPROM and EEPROM</li>
-                </ul>
-
-                <h3>Interleaved Memory</h3>
-                <div class="definition">
-                    <strong>Interleaved Memory:</strong> Memory organized into multiple banks that can service requests simultaneously, increasing effective read/write rate by factor of K (number of banks).
-                </div>
-
-                <h3>Memory Errors</h3>
-                <div class="comparison">
-                    <div class="comparison-item">
-                        <h5>Hard Failure</h5>
-                        <ul>
-                            <li>Permanent physical defect</li>
-                            <li>Cell stuck at 0 or 1</li>
-                            <li>Causes: harsh environment, manufacturing defects, wear</li>
-                        </ul>
-                    </div>
-                    <div class="comparison-item">
-                        <h5>Soft Error</h5>
-                        <ul>
-                            <li>Random, non-destructive event</li>
-                            <li>No permanent damage</li>
-                            <li>Causes: power problems, alpha particles</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3>Error Correcting Codes (ECC)</h3>
-                <div class="key-point">
-                    <strong>Hamming Code:</strong> Can correct single-bit errors and detect double-bit errors
-                    <ul>
-                        <li>For M data bits, requires K check bits</li>
-                        <li>K check bits where 2<sup>K</sup> ≥ M + K + 1</li>
-                        <li>Uses parity bits positioned at powers of 2</li>
-                    </ul>
-                </div>
-
-                <div class="definition">
-                    <strong>SEC-DED Code:</strong> Single-Error-Correcting, Double-Error-Detecting code - most common in semiconductor memory systems.
-                </div>
-
-                <h3>Advanced DRAM Types</h3>
-                <ul>
-                    <li><strong>SDRAM (Synchronous DRAM):</strong> Synchronized with system clock</li>
-                    <li><strong>DDR SDRAM (Double Data Rate):</strong> Transfers on both clock edges</li>
-                    <li><strong>RDRAM (Rambus DRAM):</strong> High-speed proprietary design</li>
-                    <li><strong>CDRAM (Cache DRAM):</strong> Integrates small SRAM cache</li>
-                </ul>
-            </section>
-
-            <!-- Chapter 6 -->
-            <section id="ch6">
-                <h2>Chapter 6: External Memory</h2>
-
-                <h3>Magnetic Disk Organization</h3>
-                <div class="definition">
-                    <strong>Key Terms:</strong>
-                    <ul>
-                        <li><strong>Platter:</strong> Circular disk coated with magnetizable material</li>
-                        <li><strong>Track:</strong> Concentric rings of data on platter</li>
-                        <li><strong>Sector:</strong> Subdivision of a track; unit of data transfer</li>
-                        <li><strong>Cylinder:</strong> All tracks at same position on all platters</li>
-                        <li><strong>Gap:</strong> Separation between tracks or sectors</li>
-                    </ul>
-                </div>
-
-                <h3>Disk Performance Parameters</h3>
-                <ul>
-                    <li><strong>Seek Time:</strong> Time to position head at desired track</li>
-                    <li><strong>Rotational Delay (Latency):</strong> Time for sector to rotate under head</li>
-                    <li><strong>Access Time:</strong> Seek time + rotational delay</li>
-                    <li><strong>Transfer Time:</strong> Time to transfer data once positioned</li>
-                </ul>
-
-                <div class="formula">
-                    Access Time = Seek Time + Rotational Delay<br>
-                    Average Rotational Delay = 1/(2 × RPM/60)
-                </div>
-
-                <h3>Disk Types</h3>
-                <ul>
-                    <li><strong>Fixed-head:</strong> One read-write head per track</li>
-                    <li><strong>Movable-head:</strong> One head moves across tracks</li>
-                    <li><strong>Removable:</strong> Can be replaced (e.g., floppy, ZIP)</li>
-                    <li><strong>Non-removable:</strong> Permanently mounted (e.g., hard disk)</li>
-                </ul>
-
-                <h3>RAID (Redundant Array of Independent Disks)</h3>
-                <div class="definition">
-                    <strong>RAID:</strong> Multiple disks viewed as single logical drive with data distribution (striping) and redundancy for reliability and performance.
-                </div>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>RAID Level</th>
-                            <th>Description</th>
-                            <th>Advantages</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>RAID 0</td>
-                            <td>Striping without redundancy</td>
-                            <td>High performance, no overhead</td>
-                        </tr>
-                        <tr>
-                            <td>RAID 1</td>
-                            <td>Mirroring (duplicate disks)</td>
-                            <td>High reliability, simple recovery</td>
-                        </tr>
-                        <tr>
-                            <td>RAID 2</td>
-                            <td>Bit-level striping with Hamming code</td>
-                            <td>Error correction</td>
-                        </tr>
-                        <tr>
-                            <td>RAID 3</td>
-                            <td>Byte-level striping with parity</td>
-                            <td>High transfer rate, single parity disk</td>
-                        </tr>
-                        <tr>
-                            <td>RAID 4</td>
-                            <td>Block-level striping with parity</td>
-                            <td>Independent disk access</td>
-                        </tr>
-                        <tr>
-                            <td>RAID 5</td>
-                            <td>Block-level with distributed parity</td>
-                            <td>No bottleneck, good performance</td>
-                        </tr>
-                        <tr>
-                            <td>RAID 6</td>
-                            <td>Block-level with dual parity</td>
-                            <td>Can survive two disk failures</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Solid State Drives (SSD)</h3>
-                <div class="definition">
-                    <strong>SSD:</strong> Memory device made with solid state components (flash memory) that can replace HDDs.
-                </div>
-
-                <h3>SSD vs HDD Comparison</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>SSD</th>
-                            <th>HDD</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Speed</td>
-                            <td>Much faster (no mechanical delay)</td>
-                            <td>Slower (seek time + rotational delay)</td>
-                        </tr>
-                        <tr>
-                            <td>Durability</td>
-                            <td>More durable (no moving parts)</td>
-                            <td>Vulnerable to physical shock</td>
-                        </tr>
-                        <tr>
-                            <td>Power</td>
-                            <td>Lower power consumption</td>
-                            <td>Higher power consumption</td>
-                        </tr>
-                        <tr>
-                            <td>Noise</td>
-                            <td>Silent</td>
-                            <td>Audible spinning/seeking</td>
-                        </tr>
-                        <tr>
-                            <td>Lifespan</td>
-                            <td>Limited write cycles</td>
-                            <td>Mechanical wear over time</td>
-                        </tr>
-                        <tr>
-                            <td>Cost</td>
-                            <td>More expensive per GB</td>
-                            <td>Less expensive per GB</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Flash Memory Types</h3>
-                <div class="comparison">
-                    <div class="comparison-item">
-                        <h5>NOR Flash</h5>
-                        <ul>
-                            <li>Basic unit: 1 bit</li>
-                            <li>High-speed random access</li>
-                            <li>Used for: BIOS, firmware</li>
-                        </ul>
-                    </div>
-                    <div class="comparison-item">
-                        <h5>NAND Flash</h5>
-                        <ul>
-                            <li>Basic unit: 16 or 32 bits</li>
-                            <li>Block-wise read/write</li>
-                            <li>Used for: USB drives, SSDs, memory cards</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3>SSD Practical Issues</h3>
-                <ol>
-                    <li><strong>Performance Degradation:</strong> Slows down with use due to write amplification</li>
-                    <li><strong>Limited Write Cycles:</strong> Flash cells wear out after certain number of writes
-                        <ul>
-                            <li>Mitigation: write caching, wear leveling, bad-block management</li>
-                        </ul>
-                    </li>
-                </ol>
-
-                <h3>Optical Storage</h3>
-                <ul>
-                    <li><strong>CD-ROM:</strong> Read-only, 650-700 MB</li>
-                    <li><strong>CD-R:</strong> Write once, read many</li>
-                    <li><strong>CD-RW:</strong> Rewritable using phase change</li>
-                    <li><strong>DVD:</strong> Higher capacity (4.7-17 GB)</li>
-                    <li><strong>Blu-ray:</strong> High-definition, up to 50 GB dual-layer</li>
-                </ul>
-
-                <h3>Magnetic Tape</h3>
-                <div class="key-point">
-                    <ul>
-                        <li>Sequential access medium</li>
-                        <li>Parallel tracks running lengthwise</li>
-                        <li>Blocks separated by inter-record gaps</li>
-                        <li>Used for backup and archival storage</li>
-                        <li>Very high capacity, low cost per GB</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Chapter 8 -->
-            <section id="ch8">
-                <h2>Chapter 8: Operating System Support</h2>
-
-                <h3>Operating System Objectives</h3>
-                <div class="definition">
-                    <strong>Operating System:</strong> Program that controls execution of application programs and acts as interface between applications and hardware.
-                    <ul>
-                        <li><strong>Convenience:</strong> Makes computer easier to use</li>
-                        <li><strong>Efficiency:</strong> Allows efficient use of system resources</li>
-                    </ul>
-                </div>
-
-                <h3>OS Services</h3>
-                <ul>
-                    <li><strong>Program Creation:</strong> Utility programs and tools</li>
-                    <li><strong>Program Execution:</strong> Loading and running programs</li>
-                    <li><strong>Access to I/O Devices:</strong> Uniform interface to devices</li>
-                    <li><strong>Controlled Access to Files:</strong> File management and protection</li>
-                    <li><strong>System Access:</strong> Security and authentication</li>
-                    <li><strong>Error Detection and Response:</strong> Handling errors gracefully</li>
-                    <li><strong>Accounting:</strong> Usage statistics and billing</li>
-                </ul>
-
-                <h3>Key System Interfaces</h3>
-                <ul>
-                    <li><strong>ISA (Instruction Set Architecture):</strong> Machine language boundary between hardware and software</li>
-                    <li><strong>ABI (Application Binary Interface):</strong> Standard for binary portability; defines system calls</li>
-                    <li><strong>API (Application Programming Interface):</strong> High-level library calls for application portability</li>
-                </ul>
-
-                <div class="key-point">
-                    <strong>Kernel (Nucleus):</strong> The portion of OS in main memory containing most frequently used functions.
-                </div>
-
-                <h3>Types of Operating Systems</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Dimension 1</th>
-                            <th>Dimension 2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Batch System:</strong> Jobs batched and submitted by operator</td>
-                            <td><strong>Uniprogramming:</strong> One program at a time</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Interactive System:</strong> Direct user interaction with computer</td>
-                            <td><strong>Multiprogramming:</strong> Multiple programs in memory; CPU switches among them</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Desirable Hardware Features</h3>
-                <ul>
-                    <li><strong>Memory Protection:</strong> Prevent user programs from altering OS memory</li>
-                    <li><strong>Timer:</strong> Prevent jobs from monopolizing system</li>
-                    <li><strong>Privileged Instructions:</strong> Certain instructions only executable by OS</li>
-                    <li><strong>Interrupts:</strong> Allow OS to regain control flexibly</li>
-                </ul>
-
-                <h3>Scheduling Types</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Long-Term</td>
-                            <td>Decides which programs to admit to system (add to process pool)</td>
-                        </tr>
-                        <tr>
-                            <td>Medium-Term</td>
-                            <td>Manages degree of multiprogramming (swapping decisions)</td>
-                        </tr>
-                        <tr>
-                            <td>Short-Term (Dispatcher)</td>
-                            <td>Decides which ready process executes next; executes frequently</td>
-                        </tr>
-                        <tr>
-                            <td>I/O</td>
-                            <td>Decides which pending I/O request to handle next</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Five-State Process Model</h3>
-                <ul>
-                    <li><strong>New:</strong> Process just created</li>
-                    <li><strong>Ready:</strong> Waiting for CPU</li>
-                    <li><strong>Running:</strong> Currently executing</li>
-                    <li><strong>Blocked (Waiting):</strong> Waiting for I/O or event</li>
-                    <li><strong>Exit:</strong> Process terminated</li>
-                </ul>
-
-                <h3>Memory Management Techniques</h3>
-
-                <h4>Swapping</h4>
-                <div class="definition">
-                    <strong>Swapping:</strong> Moving processes between main memory and disk to manage memory availability.
-                </div>
-
-                <h4>Partitioning</h4>
-                <ul>
-                    <li><strong>Fixed-size Partitions:</strong> Memory divided into fixed regions; simple but wasteful</li>
-                    <li><strong>Variable-size Partitions:</strong> Allocate exact amount needed; more efficient</li>
-                </ul>
-
-                <h4>Paging</h4>
-                <div class="definition">
-                    <strong>Paging:</strong> Memory divided into fixed-size frames; process divided into pages of same size. Pages can be non-contiguous in memory.
-                    <ul>
-                        <li>Logical address = (page number, offset)</li>
-                        <li>Physical address = (frame number, offset)</li>
-                        <li>Page table maps page numbers to frame numbers</li>
-                    </ul>
-                </div>
-
-                <h4>Segmentation</h4>
-                <div class="definition">
-                    <strong>Segmentation:</strong> Memory viewed as collection of variable-sized segments. Visible to programmer; supports logical structure of programs.
-                    <ul>
-                        <li>Simplifies handling of growing data structures</li>
-                        <li>Allows independent compilation and linking</li>
-                        <li>Facilitates sharing and protection</li>
-                    </ul>
-                </div>
-
-                <h3>Virtual Memory</h3>
-                <div class="definition">
-                    <strong>Virtual Memory (Demand Paging):</strong> Pages brought into memory only when needed.
-                    <ul>
-                        <li>Based on principle of locality</li>
-                        <li>Allows more processes in memory</li>
-                        <li>Page fault triggers OS to load required page</li>
-                    </ul>
-                </div>
-
-                <div class="key-point">
-                    <strong>TLB (Translation Lookaside Buffer):</strong> High-speed cache for page table entries; reduces address translation time.
-                </div>
-
-                <h3>Thrashing</h3>
-                <div class="definition">
-                    <strong>Thrashing:</strong> Condition where processor spends most time swapping pages rather than executing instructions. Occurs when working set exceeds available memory.
-                </div>
-
-                <h3>Memory Management in Pentium II</h3>
-                <ul>
-                    <li>Supports both segmentation and paging</li>
-                    <li>Four modes:
-                        <ul>
-                            <li>Unsegmented unpaged (simple addressing)</li>
-                            <li>Unsegmented paged (linear paging)</li>
-                            <li>Segmented unpaged (logical partitions)</li>
-                            <li>Segmented paged (both mechanisms)</li>
-                        </ul>
-                    </li>
-                    <li>Virtual address: 16-bit segment + 32-bit offset = 64 TB virtual space</li>
-                    <li>Physical address: 32-bit = 4 GB physical space</li>
-                    <li>Four privilege levels (0 = most protected)</li>
-                </ul>
-
-                <h3>ARM Memory Management</h3>
-                <ul>
-                    <li>Two-level translation tables</li>
-                    <li>Supports sections (1 MB), supersections (16 MB), large pages (64 KB), small pages (4 KB)</li>
-                    <li>16 domains for access control</li>
-                    <li>Access permissions: no access, read-only, read-write</li>
-                    <li>Privileged vs. unprivileged access</li>
-                </ul>
-            </section>
-        </main>
-
-        <footer>
-            <p>Compiled from William Stallings - Computer Organization and Architecture, 9th Edition</p>
-            <p>Study guide generated for comprehensive exam preparation</p>
-        </footer>
+        </div>
     </div>
 </body>
 </html>
